@@ -1,5 +1,10 @@
 const router = require('express').Router();
-const { addComment, removeComment } = require('../../controllers/comment-controller');
+const { 
+    addComment,
+    removeComment,
+    addReply,
+    removeReply
+} = require('../../controllers/comment-controller');
 
 // POST a comment at '/api/comments/:pizzaId'
 router
@@ -9,6 +14,12 @@ router
 // DELETE a comment at '/api/comments/:pizzaId/:commentId
 router
     .route('/:pizzaId/:commentId')
+    .put(addReply)
     .delete(removeComment);
+
+// DELETE a reply at '/api/comments/:pizzaId/:commentId/:replyId'
+router
+    .route('/:pizzaId/:commentId/:replyId')
+    .delete(removeReply);
 
 module.exports = router;
